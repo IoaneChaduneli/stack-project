@@ -3,9 +3,12 @@
 {% block content %}
 <div>
     <form method ="POST">
+        <h4>{{ request.user }}</h4>
         {% csrf_token %}
         {{form.as_p}}
-        <button type ='submit'>Ask</button>
+
+        <div><button type ='submit'>Ask</button></div>
+        
     </form>
 </div>
 

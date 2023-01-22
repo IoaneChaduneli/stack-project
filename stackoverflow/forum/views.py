@@ -1,7 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect 
 from django.views.generic import ListView, DetailView, CreateView
 from forum.models import Question
 from forum.forms import QuestionCreateForm
+from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 
 class HomeView(ListView):
@@ -35,10 +37,16 @@ class QuestionDetailView(DetailView):
 #                 'form' : form,
 #             })
  
-class QuestionCreateView(CreateView):
-    queryset = Question.objects.all()
+class QuestionCreateView(LoginRequiredMixin,CreateView):
     model = Question
     fields = [
-        'title',
-        'text'
+        'title', 'text'
     ]
+    success_url = reverse_lazy('forum:home')
+    template_name = 'forum/question_add.html'
+
+    def form_valid(self, form):
+        self.object: Question = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.save()
+        return super().form_valid(form)
