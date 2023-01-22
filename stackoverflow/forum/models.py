@@ -20,7 +20,7 @@ class Answer(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete = models.CASCADE)
 
-    text = models.TextField
+    text = models.TextField()
     create_time = models.DateTimeField(auto_now_add=True)
 
 class Tag(models.Model):
