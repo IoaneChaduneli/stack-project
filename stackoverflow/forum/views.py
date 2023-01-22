@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView
 from forum.models import Question
-from forum.forms import QuestionCreateForm, AnswerCreateForm
+from forum.forms import QuestionCreateForm
 # Create your views here.
 
 class HomeView(ListView):
@@ -13,44 +13,32 @@ class QuestionDetailView(DetailView):
     template_name = 'forum/question_detail.html'
 
 
-def create_question_views(request):
-    if request.method == 'GET':
-        return render (
-                request, 
-                'forum/question_add.html',
-            {
-                'form' : QuestionCreateForm(),
-            })
-    else:
-        form = QuestionCreateForm(request.POST)
+# def create_question_views(request):
+#     if request.method == 'GET':
+#         return render (
+#                 request, 
+#                 'forum/question_add.html',
+#             {
+#                 'form' : QuestionCreateForm(),
+#             })
+#     else:
+#         form = QuestionCreateForm(request.POST)
 
-        if form.is_valid:
-            form.save()
-            return redirect('forum:home')
+#         if form.is_valid:
+#             form.save()
+#             return redirect('forum:home')
 
-        return render (
-                request, 
-                'forum/question_add.html',
-            {
-                'form' : form,
-            })
+#         return render (
+#                 request, 
+#                 'forum/question_add.html',
+#             {
+#                 'form' : form,
+#             })
  
-
-def create_answer_views(request):
-    if request.method == 'GET':
-        return render (
-            request,
-            'forum/question_add.html',{
-                'form': AnswerCreateForm
-            })
-    else:
-        form = AnswerCreateForm(request.POST)
-        if form.is_valid:
-            form.save()
-            return redirect('forum:home')
-        return render(
-                request,
-                'forum/answer.html',{
-                    'form':form
-                }
-        )
+class QuestionCreateView(CreateView):
+    queryset = Question.objects.all()
+    model = Question
+    fields = [
+        'title',
+        'text'
+    ]

@@ -10,9 +10,3 @@ class QuestionCreateForm(forms.ModelForm):
             'user',
         ]
 
-class AnswerCreateForm(forms.ModelForm):
-    class Meta:
-        model = Answer
-        fiels = [
-            'text'
-        ]
