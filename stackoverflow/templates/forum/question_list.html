@@ -10,8 +10,11 @@
             <p>
          {{question.text |slice:100}} ...</p>
          <a href ='/question/{{ question.pk }}'>Read More</a>
-          <div>      
-          </div>
+         <div>
+            {% for tag in question.tag_set.all %}
+                <span class="badge bg-primary">{{ tag.name }}</span>
+            {% endfor %}
+        </div>
     {% endfor %}
     
 </div>
