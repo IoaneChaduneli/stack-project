@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div>
+    <a href ='/ask/'>Add Question</a>
+<div>
+    {% for question in question_list %}
+        <h2>{{question.title}}</h2>
+        <small>{{question.user}} &mdash; {{question.create_time}}</small
+            <p>
+         {{question.text |slice:100}} ...</p>
+         <a href ='/question/{{ question.pk }}'>Read More</a>
+          <div>      
+          </div>
+    {% endfor %}
+    
+</div>
+
+{% endblock content %}
+

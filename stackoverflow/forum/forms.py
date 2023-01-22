@@ -4,4 +4,8 @@ from forum.models import Question
 class QuestionCreateForm(forms.ModelForm):
     class Meta:
         model = Question
-        fields = '__all__'
+        fields = [
+            'title',
+            'text',
+            'user',
+        ]

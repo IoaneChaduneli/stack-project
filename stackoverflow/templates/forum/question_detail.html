@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>{{question.title}}</h2>
+        <small>{{question.user}} &mdash; {{question.create_time}}</small
+            <p>
+         {{question.text}}</p>
+         <small>{{question.views}} Views</small>
+{% endblock content %}
