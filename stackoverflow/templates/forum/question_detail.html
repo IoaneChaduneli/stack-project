@@ -1,10 +1,21 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div>
+    <div class ='container-fluid w-75'>
+        <div class = "d-flex justify-content-between">
+            <h2>{{question.title}}</h2>
+            {% if question.user == request.user %} 
+                <a href={% url 'forum:question-edit' question.pk %} class="btn btn-primary">Edit</a>
+                <a class="btn btn-primary">Delete</a>
+             {% endif %} 
+        </div
 
-<h2>{{question.title}}</h2>
+
         <small>{{question.user}} &mdash; {{question.create_time}}</small
             <p>
          {{question.text}}</p>
          <small>{{question.views}} Views</small>
+    </div
+</div>
 {% endblock content %}

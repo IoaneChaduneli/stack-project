@@ -59,4 +59,6 @@ class CreateUpdateView(LoginRequiredMixin, UpdateView):
     ]
 
     def get_queryset(self):
+        if self.request.user.is_staff: 
+            return Question.objects.all()
         return Question.objects.filter(user = self.request.user)
