@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect 
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from forum.models import Question
 from forum.forms import QuestionCreateForm
 from django.urls import reverse_lazy
@@ -50,3 +50,13 @@ class QuestionCreateView(LoginRequiredMixin,CreateView):
         self.object.user = self.request.user
         self.object.save()
         return super().form_valid(form)
+
+class CreateUpdateView(LoginRequiredMixin, UpdateView):
+    model = Question
+    template_name = 'forum/question_edit.html'
+    fields = [
+        'title', 'text'
+    ]
+
+    def get_queryset(self):
+        return Question.objects.filter(user = self.request.user)

@@ -4,6 +4,7 @@
 <div>
     <a href ='/ask/'>Add Question</a>
 <div>
+
     {% for question in question_list %}
         <h2>{{question.title}}</h2>
         <small>{{question.user}} &mdash; {{question.create_time}}</small
