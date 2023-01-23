@@ -16,6 +16,9 @@ class Question(models.Model):
     def __str__(self) -> str:
         return self.title
 
+    def get_absolute_url(self):
+        return reverse('forum:question-detail', kwargs={'pk': self.pk})
+
 class Answer(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete = models.CASCADE)

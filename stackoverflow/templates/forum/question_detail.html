@@ -7,7 +7,7 @@
             <h2>{{question.title}}</h2>
             {% if question.user == request.user %} 
                 <a href={% url 'forum:question-edit' question.pk %} class="btn btn-primary">Edit</a>
-                <a class="btn btn-primary">Delete</a>
+                <a href={% url 'forum:question-delete' question.pk %} class="btn btn-primary">Delete</a>
              {% endif %} 
         </div
 
